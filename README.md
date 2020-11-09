@@ -4,11 +4,13 @@
 
 This project grabs a completely random comic at the click of a button.
 
+### A random comic for you!
+
 ![A random xkcd](https://ec-xkcd.azurewebsites.net/api/xkcd)
 
 ## tl;dr
 
-For markdown, add `![alt text](https://ec-xkcd.azurewebsites.net/api/xkcd)` to your profile page for a random comic every time you reload!
+For markdown, add `![alt text](https://ec-xkcd.azurewebsites.net/api/xkcd)` to your profile page for a random comic every time you reload! (Or once every few minutes, like GitHub)
 
 For html, add `<img src="https://ec-xkcd.azurewebsites.net/api/xkcd" alt="alt text">` to the page.
 
