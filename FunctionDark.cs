@@ -6,13 +6,13 @@ using System.IO;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using ImageProcessor;
-using ImageProcessor.Imaging.Filters.Photo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace random_xkcd
 {
@@ -30,11 +30,13 @@ namespace random_xkcd
             req.HttpContext.Response.Headers.Add("ETag", Convert.ToBase64String(bytes));
             // Fetch the image, and apply a filter on it
             var val = await Function.Fetch();
-            val.Filter(MatrixFilters.GreyScale);
-            val.Filter(MatrixFilters.Invert);
+            val.Mutate(x => x.Grayscale());
+            val.Mutate(x => x.Invert());
+            // Return image
             var ms = new MemoryStream();
-            val.Save(ms);
-            return new FileStreamResult(ms, "image/webp");
+            await val.SaveAsPngAsync(ms);
+            ms.Position = 0;
+            return new FileStreamResult(ms, "image/png");
         }
     }
 }

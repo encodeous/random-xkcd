@@ -11,9 +11,6 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using CodeHollow.FeedReader;
 using CodeHollow.FeedReader.Feeds;
-using ImageProcessor;
-using ImageProcessor.Imaging.Formats;
-using ImageProcessor.Plugins.WebP.Imaging.Formats;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -21,6 +18,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace random_xkcd
 {
@@ -35,13 +35,15 @@ namespace random_xkcd
             byte[] bytes = new byte[8];
             Rand.NextBytes(bytes);
             req.HttpContext.Response.Headers.Add("ETag", Convert.ToBase64String(bytes));
+            // Fetch Image
             var fact = await Fetch();
             // Return image
             var ms = new MemoryStream();
-            fact.Save(ms);
-            return new FileStreamResult(ms, "image/webp");
+            await fact.SaveAsPngAsync(ms);
+            ms.Position = 0;
+            return new FileStreamResult(ms, "image/png");
         }
-        public static async Task<ImageFactory> Fetch()
+        public static async Task<Image> Fetch()
         {
             // Read RSS Feed to obtain the latest id
             var val = await FeedReader.ReadAsync("https://xkcd.com/atom.xml");
@@ -57,12 +59,10 @@ namespace random_xkcd
             // In the child elements, find the src of the img tag
             var tParse = container.GetElementsByTagName("img")[0].GetAttribute("src");
             // Read the image into a memory stream
-            using var srcs = new MemoryStream(webClient.DownloadData("https://" + tParse.Substring(2)));
+            var srcs = new MemoryStream(webClient.DownloadData("https://" + tParse.Substring(2)));
             // Ensure the source bitmap is PNG
-            ISupportedImageFormat format = new WebPFormat(){IsIndexed = true, Quality = 100};
-            var factory = new ImageFactory();
-            factory.Load(srcs).Format(format);
-            return factory;
+            var img = await Image.LoadAsync(srcs);
+            return img;
         }
     }
 }
