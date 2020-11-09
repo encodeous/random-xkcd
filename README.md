@@ -14,7 +14,7 @@ And a dark mode one too!
 
 ## `tl;dr`
 
-For markdown, add `![alt text](https://ec-xkcd.azurewebsites.net/api/xkcd)` to your profile page for a random comic every time you reload! (Or once every few minutes, like GitHub)
+For markdown, add `![alt text](https://ec-xkcd.azurewebsites.net/api/xkcd)` to your profile page for a random comic every time you reload! (Or once every few minutes due to caching, like GitHub)
 
 For html, add `<img src="https://ec-xkcd.azurewebsites.net/api/xkcd" alt="alt text">` to the page.
 
