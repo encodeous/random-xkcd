@@ -18,7 +18,11 @@ For html, add `<img src="https://ec-xkcd.azurewebsites.net/api/xkcd" alt="alt te
 
 ## API
 
-Send a http request to [https://ec-xkcd.azurewebsites.net/api/xkcd](https://ec-xkcd.azurewebsites.net/api/xkcd "https://ec-xkcd.azurewebsites.net/api/xkcd") and it will respond with a random xkcd as a png.
+Send a http request to [https://ec-xkcd.azurewebsites.net/api/xkcd](https://ec-xkcd.azurewebsites.net/api/xkcd "https://ec-xkcd.azurewebsites.net/api/xkcd") and it will respond with a random xkcd as a WebP image.
+
+A dark mode version is also available where a greyscale and invert filter has been applied to the image.
+
+[https://ec-xkcd.azurewebsites.net/api/xkcddark](https://ec-xkcd.azurewebsites.net/api/xkcddark "https://ec-xkcd.azurewebsites.net/api/xkcddark")
 
 ## How it works
 
