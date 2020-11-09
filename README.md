@@ -8,19 +8,25 @@ This project grabs a completely random comic at the click of a button.
 
 ![A random xkcd](https://ec-xkcd.azurewebsites.net/api/xkcd)
 
+And a dark mode one too!
+
+![A random xkcd](https://ec-xkcd.azurewebsites.net/api/xkcddark)
+
 ## `tl;dr`
 
 For markdown, add `![alt text](https://ec-xkcd.azurewebsites.net/api/xkcd)` to your profile page for a random comic every time you reload! (Or once every few minutes, like GitHub)
 
 For html, add `<img src="https://ec-xkcd.azurewebsites.net/api/xkcd" alt="alt text">` to the page.
 
+The same applies for the dark mode, where the API link is `https://ec-xkcd.azurewebsites.net/api/xkcddark`
+
 *Please note: If this api does not work, it probably means I have ran out of azure credits!*
 
 ## `API`
 
-Send a http request to [https://ec-xkcd.azurewebsites.net/api/xkcd](https://ec-xkcd.azurewebsites.net/api/xkcd "https://ec-xkcd.azurewebsites.net/api/xkcd") and it will respond with a random xkcd as a WebP image.
+Send a http request to [https://ec-xkcd.azurewebsites.net/api/xkcd](https://ec-xkcd.azurewebsites.net/api/xkcd "https://ec-xkcd.azurewebsites.net/api/xkcd") and it will respond with a random xkcd as a png.
 
-A dark mode version is also available where a greyscale and invert filter has been applied to the image.
+A dark mode version is also available where a greyscale and color invert filter has been applied to the image.
 
 [https://ec-xkcd.azurewebsites.net/api/xkcddark](https://ec-xkcd.azurewebsites.net/api/xkcddark "https://ec-xkcd.azurewebsites.net/api/xkcddark")
 
