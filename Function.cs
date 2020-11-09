@@ -42,6 +42,7 @@ namespace random_xkcd
             var ms = new MemoryStream(webClient.DownloadData("https://" + tParse.Substring(2)));
             // Disable caching, (most sites like Github cache markdown and other embedded images)
             req.HttpContext.Response.Headers.Add("Cache-Control", "no-store");
+            req.HttpContext.Response.Headers.Add("ETag", pId);
             // Return image
             return new FileStreamResult(ms, "image/png");
         }
